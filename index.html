@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Contador Parasitológico de Malaria</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#5b489d">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- PANEL IZQUIERDO: Configuración y Tiempos -->
+    <aside class="sidebar">
+      <div class="input-group">
+        <label for="laminaInput">Lámina</label>
+        <input type="text" id="laminaInput" placeholder="ID / Código">
+      </div>
+
+      <div class="radio-group">
+        <label><input type="radio" name="especie" value="V" checked> V</label>
+        <label><input type="radio" name="especie" value="F"> F</label>
+      </div>
+
+      <div class="checkbox-group">
+        <label>
+          <input type="checkbox" id="soundToggle" checked> Sonido
+        </label>
+      </div>
+
+      <div class="field-info">
+        <div class="field-title" id="currentFieldText">Campo 1</div>
+        <div class="timer-display" id="timerDisplay">00:00</div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="btnReportes" class="btn btn-purple">REPORTES</button>
+        <div class="row-btns">
+          <button id="btnExcel" class="btn btn-outline">EXCEL</button>
+          <button id="btnNueva" class="btn btn-outline">NUEVA</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- PANEL DERECHO: Tarjetas Contador -->
+    <main class="counter-panel">
+      <div class="cards-wrapper">
+        <!-- Tarjeta Asexuados -->
+        <div class="card card-asexuados" id="cardAsexuados">
+          <div class="card-header">ASEXUADOS</div>
+          <div class="card-count" id="countAsexuados">0</div>
+          <div class="card-controls">
+            <button class="btn-step" id="btnMinusAsexuados" onclick="event.stopPropagation(); window.decrement('asexuados')">−1</button>
+            <button class="btn-step" id="btnPlusAsexuados" onclick="event.stopPropagation(); window.increment('asexuados')">+1</button>
+          </div>
+        </div>
+
+        <!-- Tarjeta Sexuados -->
+        <div class="card card-sexuados" id="cardSexuados">
+          <div class="card-header">SEXUADOS</div>
+          <div class="card-count" id="countSexuados">0</div>
+          <div class="card-controls">
+            <button class="btn-step" id="btnMinusSexuados" onclick="event.stopPropagation(); window.decrement('sexuados')">−1</button>
+            <button class="btn-step" id="btnPlusSexuados" onclick="event.stopPropagation(); window.increment('sexuados')">+1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón Siguiente Campo -->
+      <button id="btnSiguiente" class="btn btn-purple btn-next">SIGUIENTE CAMPO</button>
+    </main>
+  </div>
+
+  <!-- MODAL DE REPORTE DETALLADO -->
+  <div class="modal" id="reportModal">
+    <div class="modal-content">
+      <h2>Reporte de Lectura (100 Campos)</h2>
+      <div id="modalSummary" class="modal-summary"></div>
+      <div class="table-container">
+        <table id="reportTable">
+          <thead>
+            <tr>
+              <th>Campo</th>
+              <th>Asexuados</th>
+              <th>Sexuados</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+          <tbody id="reportTableBody"></tbody>
+        </table>
+      </div>
+      <div class="modal-actions">
+        <button id="btnCloseModal" class="btn btn-purple">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
